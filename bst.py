@@ -36,8 +36,9 @@ class BST:
 
     def gen_random_tree(self):
         num_nodes = random.randint(50, 100)
+        unique_list = random.sample(range(0,10000), num_nodes)
         for i in range(0, num_nodes):
-            self.insert(random.randint(0, 1000))
+            self.insert(unique_list[i])
 
 
 def findmostleft(node, stepcount=0):
