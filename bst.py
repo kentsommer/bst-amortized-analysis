@@ -95,4 +95,4 @@ if __name__ == '__main__':
         count = inorder(cTree.root)
         size = bst_size(cTree.root)
         table.append(["table " + str(i), str(size), str(count), str(2 * (size-1))])
-    print tabulate(table, headers=["Table Number", "Table Size", "Step Count", "2(N-1)"])
+    print tabulate(table, headers=["Table Number", "Number of Nodes", "Number of Steps", "2(N-1)"])
