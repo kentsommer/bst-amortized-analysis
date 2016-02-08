@@ -3,6 +3,7 @@ from tabulate import tabulate
 
 
 class Node:
+    # Parent pointer used for easier in-order traversal function
     def __init__(self, value, parent=None):
         self.value = value
         self.left = None
@@ -14,6 +15,7 @@ class BST:
     def __init__(self):
         self.root = None
 
+    # Standard BST insert implementation
     def insert(self, value):
         if self.root is None:
             self.root = Node(value)
@@ -34,6 +36,9 @@ class BST:
                     current.right = Node(value, current)
                     return
 
+    # Select random number N between 50:100 for use as tree size.
+    # Sample N unique random numbers between 0:10,000
+    # For each i'th unique number insert value into tree.
     def gen_random_tree(self):
         num_nodes = random.randint(50, 100)
         unique_list = random.sample(range(0,10000), num_nodes)
@@ -41,6 +46,9 @@ class BST:
             self.insert(unique_list[i])
 
 
+# If current node has left child
+# Set current to left child
+# Continue until no more left children
 def findmostleft(node, stepcount=0):
     stepcount = stepcount
     current = node
@@ -53,6 +61,9 @@ def findmostleft(node, stepcount=0):
     return current, stepcount
 
 
+# If the current node has a right child, return leftmost child of right child.
+# Else, continue going up parent pointers until parent.left equals current
+# Return parent
 def findnext(node):
     stepcount = 0
     if node.right != None:
@@ -69,6 +80,8 @@ def findnext(node):
         return parent, stepcount
 
 
+# Get first node by calling findmostleft on root
+# Loop N-1 times (where N is the size of the tree) and make N-1 calls to findnext
 def inorder(node):
     stepcount = 0
     first = findmostleft(node)
@@ -94,5 +107,5 @@ if __name__ == '__main__':
         cTree.gen_random_tree()
         count = inorder(cTree.root)
         size = bst_size(cTree.root)
-        table.append(["table " + str(i), str(size), str(count), str(2 * (size-1))])
-    print tabulate(table, headers=["Table Number", "Number of Nodes", "Number of Steps", "2(N-1)"])
+        table.append(["Tree " + str(i), str(size), str(count), str(2 * (size-1))])
+    print tabulate(table, headers=["Tree Number", "Number of Nodes", "Number of Steps", "2(N-1)"])
