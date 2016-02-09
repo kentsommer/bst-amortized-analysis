@@ -81,7 +81,7 @@ def findnext(node):
 
 
 # Get first node by calling findmostleft on root
-# Loop N-1 times (where N is the size of the tree) and make N-1 calls to findnext
+# Make N-1 calls to findnext (where N is the size of the tree)
 def inorder(node):
     stepcount = 0
     first = findmostleft(node)
@@ -100,6 +100,8 @@ def bst_size(root, count=0):
     return bst_size(root.left, bst_size(root.right, count + 1))
 
 
+# Main function to allow for quick comparison and testing
+# Generates 50 random trees and displays actual steps, estimated steps, and size of tree
 if __name__ == '__main__':
     table = []
     for i in range(1, 51):
